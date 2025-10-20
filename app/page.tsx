@@ -12,40 +12,50 @@ const API_URL = "http://localhost:5159/levantamentos"
 
 export default function Main() {
   const [formActive, setFormActive] = useState<Boolean>(false);
-  const [dataLevantamento, setDataLevantamento] = useState<String>("");
-  const [quantCarne, setQuantCarne] = useState<Number>(0);
-  const [quantFranbacon, setQuantFranbacon] = useState<Number>(0);
-  const [quantLinguica, setQuantLinguica] = useState<Number>(0);
-  const [quantCarvao, setQuantCarvao] = useState<Number | undefined>(0);
-  const [precoDespesaCarvao, setPrecoDespesaCarvao] = useState<Number | undefined>(0);
+  const [dataLevantamento, setDataLevantamento] = useState<string>("");
+  const [quantCarne, setQuantCarne] = useState<number>(0);
+  const [quantFranbacon, setQuantFranbacon] = useState<number>(0);
+  const [quantLinguica, setQuantLinguica] = useState<number>(0);
+  const [quantCarvao, setQuantCarvao] = useState<number | undefined>(0);
+  const [precoDespesaCarvao, setPrecoDespesaCarvao] = useState<string>("");
   const [despesaCarne, setDespesaCarne] = useState<Number | undefined>(0);
-  const [precoDespesaCarne, setPrecoDespesaCarne] = useState<Number | undefined>(0);
-  const [despesaFranbacon, setDespesaFranbacon] = useState<Number | undefined>(0);
-  const [precoDespesaFranbacon, setPrecoDespesaFranbacon] = useState<Number | undefined>(0);
-  const [despesaLinguica, setDespesaLinguica] = useState<Number | undefined>(0);
-  const [precoDespesaLinguica, setPrecoDespesaLinguica] = useState<Number | undefined>(0);
+  const [precoDespesaCarne, setPrecoDespesaCarne] = useState<string>("");
+  const [despesaFranbacon, setDespesaFranbacon] = useState<number | undefined>(0);
+  const [precoDespesaFranbacon, setPrecoDespesaFranbacon] = useState<string>("");
+  const [despesaLinguica, setDespesaLinguica] = useState<number | undefined>(0);
+  const [precoDespesaLinguica, setPrecoDespesaLinguica] = useState<string>("");
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    
-    console.log("DADOS");
 
-    let dados = {
-      "data_levantamento": dataLevantamento,
-      "carne_vendida": quantCarne,
-      "franbacon_vendido": quantFranbacon,
-      "linguica_vendida": quantLinguica,
-      "despesa_carvao": quantCarvao,
-      "preco_despesa_carvao": precoDespesaCarvao,
-      "despesa_carne": despesaCarne,
-      "preco_despesa_carne": precoDespesaCarne,
-      "despesa_franbacon": despesaFranbacon,
-      "preco_despesa_franbacon": precoDespesaFranbacon,
-      "despesa_linguica": despesaLinguica,
-      "preco_despesa_linguica": precoDespesaLinguica
-    };
+    await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        "dataLevantamento": dataLevantamento,
+        "carneVendida": quantCarne,
+        "franbaconVendido": quantFranbacon,
+        "linguicaVendida": quantLinguica,
+        "carvao": quantCarvao,
+        "precoCarvao": parseFloat(precoDespesaCarvao),
+        "qntCarneDespesa": despesaCarne,
+        "precoCarneDespesa": parseFloat(precoDespesaCarne),
+        "qntFranbaconDespesa": despesaFranbacon,
+        "precoFranbaconDespesa": parseFloat(precoDespesaFranbacon),
+        "qntLinguicaDespesa": despesaLinguica,
+        "precoLinguicaDespesa": parseFloat(precoDespesaLinguica)
 
-    console.table(dados);
+      })
+    })
+      .then(res => {
+        if (res.ok) {
+          window.alert("Apontamento enviado com sucesso.");
+          console.log(res.status);
+        } else {
+          window.alert("Não foi possível enviar o apontamento.");
+          console.log(res.status);
+        }
+      })
   }
 
   return (
@@ -63,10 +73,10 @@ export default function Main() {
         <div className="w-full mt-8 p-8 flex flex-col justify-end items-end gap-2 border border-l-8 border-[#475660] rounded">
           <label htmlFor="data-levantamento" className="font-bold text-black">Data do Levantamento</label>
           <input
-          type="date"
-          id="data-levantamento"
-          className="w-2/12 p-2 font-bold text-black border rounded cursor-pointer"
-          onChange={(e) => setDataLevantamento(e.target.value)}
+            type="date"
+            id="data-levantamento"
+            className="w-2/12 p-2 font-bold text-black border rounded cursor-pointer"
+            onChange={(e) => setDataLevantamento(e.target.value)}
           />
         </div>
 
@@ -103,8 +113,8 @@ export default function Main() {
               className="w-2/12 p-2 border border-l-4 border-[#475660] rounded text-black outline-none"
               type="text"
               id="carvao"
-              onChange={(e) => setPrecoDespesaCarvao(Number(e.target.value))}
-              value={Number(precoDespesaCarvao)}
+              onChange={(e) => setPrecoDespesaCarvao(e.target.value)}
+              value={precoDespesaCarvao}
             />
           </div>
           <hr className="border-[#c8c8c8]" />
@@ -119,8 +129,8 @@ export default function Main() {
                 className="w-6/12 p-2 border border-l-4 border-[#475660] rounded text-black outline-none"
                 type="text"
                 id="carvao"
-                onChange={(e) => setPrecoDespesaCarne(Number(e.target.value))}
-                value={Number(precoDespesaCarne)}
+                onChange={(e) => setPrecoDespesaCarne(e.target.value)}
+                value={precoDespesaCarne}
               />
             </div>
             <div className="flex gap-4 items-center">
@@ -132,8 +142,8 @@ export default function Main() {
                 className="w-6/12 p-2 border border-l-4 border-[#475660] rounded text-black outline-none"
                 type="text"
                 id="carvao"
-                onChange={(e) => setPrecoDespesaFranbacon(Number(e.target.value))}
-                value={Number(precoDespesaFranbacon)}
+                onChange={(e) => setPrecoDespesaFranbacon(e.target.value)}
+                value={precoDespesaFranbacon}
               />
             </div>
             <div className="flex gap-4 items-center">
@@ -145,8 +155,8 @@ export default function Main() {
                 className="w-6/12 p-2 border border-l-4 border-[#475660] rounded text-black outline-none"
                 type="text"
                 id="carvao"
-                onChange={(e) => setPrecoDespesaLinguica(Number(e.target.value))}
-                value={Number(precoDespesaLinguica)}
+                onChange={(e) => setPrecoDespesaLinguica(e.target.value)}
+                value={precoDespesaLinguica}
               />
             </div>
           </div>
