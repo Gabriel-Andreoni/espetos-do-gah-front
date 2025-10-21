@@ -9,8 +9,8 @@ import MinusIcon from "@/public/botao-de-menos.png";
 const API_URL = "http://localhost:5077/levantamentos";
 
 export default function Formulario() {
-    const [formActive, setFormActive] = useState<Boolean>(false);
-    const [dataLevantamento, setDataLevantamento] = useState<String>("");
+    const [formActive, setFormActive] = useState<boolean>(false);
+    const [dataLevantamento, setDataLevantamento] = useState<string>("");
     const [quantCarne, setQuantCarne] = useState<number>(0);
     const [precoVendidoCarne, setPrecoVendidoCarne] = useState<number>(0);
     const [quantFranbacon, setQuantFranbacon] = useState<number>(0);
