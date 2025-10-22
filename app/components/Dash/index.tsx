@@ -1,61 +1,61 @@
 "use client";
 
-import { Levantamento } from "@/app/types/Levantamento";
-import { useEffect, useState } from "react";
-
-const API_URL = "http://localhost:5077/levantamentos";
+import { useState, useEffect } from "react";
 
 export default function Dash() {
-  const [levantamentos, setLevantamentos] = useState<Levantamento[]>();
+  const [lucroBruto, setLucroBruto] = useState<string>();
+  const [despesas, setDespesas] = useState<string>();
 
   useEffect(() => {
-    async function GetLevantamentos() {
-      const request = await fetch(API_URL);
-      const data = await request.json();
-      setLevantamentos(data);
-    }
+    const lucroBruto = Number(localStorage.getItem("lucroBruto")).toLocaleString("pt-BR", {
+      currency: "BRL",
+      style: "currency"
+    });
 
-    GetLevantamentos();
-  }, []);
+    setLucroBruto(lucroBruto)
+    
+    const despesas = Number(localStorage.getItem("despesas")).toLocaleString("pt-BR", {
+      currency: "BRL",
+      style: "currency"
+    });
 
-  const data = new Date();
-  const dataAtual = `${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()}`
-  
-  const levantamentoFiltrado = levantamentos?.filter((f) => f.dataLevantamento == String(dataAtual));
-  console.log(levantamentoFiltrado)
+    setDespesas(despesas)
 
-  const lucro = levantamentoFiltrado?.reduce((total, item) => {
-    return (
-      total +
-      (item.precoVendidoCarne || 0) +
-      (item.precoVendidoFranbacon || 0) +
-      (item.precoVendidoLinguica || 0)
-    );
-  }, 0);
-
-  const despesas = levantamentoFiltrado?.reduce((total, item) => {
-    return (
-        total +
-        (item.precoCarneDespesa || 0) +
-        (item.precoFranbaconDespesa || 0) +
-        (item.precoLinguicaDespesa || 0)
-    );
-  }, 0)
-
+  }, [])
   return (
     <div className="w-full absolute inset-0">
       <div className="w-full p-8 flex justify-evenly">
         <div className="6/12 flex flex-col justify-start">
           <h2 className="text-2xl">Lucro Bruto</h2>
-          <span className="text-6xl">{lucro?.toLocaleString("pt-br", {currency: "BRL", style: "currency"})}</span>
+          <span className="text-6xl">
+           {lucroBruto}
+          </span>
         </div>
 
         <div className="6/12 flex flex-col justify-end">
           <h2 className="text-2xl">Despesas</h2>
-          <span className="text-6xl">{despesas?.toLocaleString("pt-br", {currency: "BRL", style: "currency"})}</span>
+          <span className="text-6xl">
+            {despesas}
+          </span>
         </div>
       </div>
-      <div className="w-full p-8 flex justify-start items-center"></div>
+
+      <div className="w-full p-8 flex items-center">
+        <div className="6/12 flex flex-col">
+          <h2 className="text-xl">Espeto mais vendido</h2>
+          <h4>{""}</h4>
+          <span className="text-6xl">
+            {""}
+          </span>
+        </div>
+        <div className="6/12 flex flex-col">
+          <h2 className="text-xl">Espeto mais vendido</h2>
+          <h4>{""}</h4>
+          <span className="text-6xl">
+            {""}
+          </span>
+        </div>
+      </div>
     </div>
   );
 }
