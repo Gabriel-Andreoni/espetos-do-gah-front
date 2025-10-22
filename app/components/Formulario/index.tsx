@@ -27,7 +27,9 @@ export default function Formulario() {
   const [precoDespesaLinguica, setPrecoDespesaLinguica] = useState<number>(0);
 
   const data = new Date();
-  const dataAtual = `${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()}`;
+  const dataAtual = `${data.getFullYear()}-${
+    data.getMonth() + 1
+  }-${data.getDate()}`;
 
   function setLocalStorageValues() {
     if (dataLevantamento == dataAtual) {
@@ -42,6 +44,16 @@ export default function Formulario() {
         precoDespesaCarvao,
       ].reduce((a, b) => a + b, 0);
       localStorage.setItem("despesas", String(despesas));
+
+      const lucroLiquido = lucroBruto - despesas;
+      localStorage.setItem("lucroLiquido", String(lucroLiquido));
+
+      const espetoMaisVendido = [
+        { nome: "Carne", quantidade: quantCarne },
+        { nome: "Franbacon", quantidade: quantFranbacon },
+        { nome: "Linguiça", quantidade: quantLinguica },
+      ].reduce((a, b) => (a.quantidade > b.quantidade ? a : b));
+      localStorage.setItem("espetoMaisVendido", JSON.stringify(espetoMaisVendido))
     }
   }
 
