@@ -65,7 +65,7 @@ export default function Formulario() {
     }
 
     return (
-        <div className={`w-full h-screen  p-8 z-[9999999] ${formActive ? "overflow-y-scroll": ""} relative`}>
+        <div className={`w-full h-screen  p-8 z-[9999999] relative`}>
             <form
                 className={`w-full h-auto p-8 flex flex-col gap-4 bg-[#f9f9f9] rounded ${formActive ? "translate-0 " : "translate-y-9/12"
                     } relative transition-all duration-300`}
