@@ -11,8 +11,9 @@ export default function DashBoard() {
   const lucroBruto = GetLucroBruto();
   const lucroLiquido = GetLucroLiquido();
   const despesas = GetDespesas();
+  const espetoMaisVendidoRaw = GetEspetoMaisVendido(); 
   let espetoMaisVendido;
-  if(GetEspetoMaisVendido()) espetoMaisVendido = JSON.parse(GetEspetoMaisVendido());
+  if(espetoMaisVendidoRaw) espetoMaisVendido = JSON.parse(espetoMaisVendidoRaw);
   
   return (
     <main className="w-full h-screen p-8 grid grid-cols-4 grid-rows-4 gap-8">
