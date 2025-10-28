@@ -1,5 +1,5 @@
 export function GetLucroBruto() {
-    let lucroBruto = Number(localStorage.getItem("lucroBruto")).toLocaleString("pt-BR", {
+    const lucroBruto = Number(localStorage.getItem("lucroBruto")).toLocaleString("pt-BR", {
         style: "currency",
         currency: "BRL"
     })

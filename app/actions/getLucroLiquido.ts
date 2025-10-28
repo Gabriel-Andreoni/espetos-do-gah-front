@@ -1,8 +1,8 @@
 export function GetLucroLiquido() {
-    let lucroBruto = Number(localStorage.getItem("lucroBruto"));
-    let despesas = Number(localStorage.getItem("despesas"));
+    const lucroBruto = Number(localStorage.getItem("lucroBruto"));
+    const despesas = Number(localStorage.getItem("despesas"));
 
-    let lucroLiquido =  (lucroBruto - despesas).toLocaleString("pt-br", {
+    const lucroLiquido =  (lucroBruto - despesas).toLocaleString("pt-br", {
         style: "currency",
         currency: "BRL"
     });
