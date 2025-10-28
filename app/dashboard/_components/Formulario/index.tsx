@@ -95,22 +95,22 @@ export default function Formulario() {
   return (
     <div className={`w-full h-auto col-span-3 row-span-4`}>
       <form
-        className="w-full h-auto px-8 flex flex-col gap-4 bg-[#f9f9f9]"
+        className="w-full h-auto px-8 flex flex-col gap-4 bg-[#FDFFFC]"
         onSubmit={handleSubmit}
       >
-        <div className="w-full mt-8 p-6 flex flex-col justify-end items-end gap-2 border border-l-8 border-[#475660] rounded">
+        <div className="w-full mt-8 p-6 flex flex-col justify-end items-end gap-2 border border-l-8 border-[#194164] rounded">
           <label htmlFor="data-levantamento" className="font-bold text-black">
             Data do Levantamento
           </label>
           <input
             type="date"
             id="data-levantamento"
-            className="w-2/12 p-2 font-bold text-black border rounded cursor-pointer"
+            className="w-2/12 p-2 font-bold text-black border border-[#194164] rounded cursor-pointer"
             onChange={(e) => setDataLevantamento(e.target.value)}
           />
         </div>
 
-        <div className="w-full p-6 flex flex-wrap justify-evenly gap-y-4 border border-l-8 border-[#475660] rounded">
+        <div className="w-full p-6 flex flex-wrap justify-evenly gap-y-4 border border-l-8 border-[#194164] rounded">
           <h2 className="w-full text-black font-bold">Espetos Vendidos</h2>
           <div className="flex gap-4 items-center">
             <label className="text-black font-bold">Carne</label>
@@ -218,7 +218,7 @@ export default function Formulario() {
           </div>
         </div>
 
-        <div className="w-full p-6 flex flex-col gap-8 border border-l-8 border-[#475660] rounded">
+        <div className="w-full p-6 flex flex-col gap-8 border border-l-8 border-[#194164] rounded">
           <h2 className="w-full text-black font-bold">Despesas</h2>
           <div className="flex gap-4 items-center">
             <label className="text-black font-bold" htmlFor="carvao">
@@ -369,7 +369,7 @@ export default function Formulario() {
             </div>
           </div>
         </div>
-        <button className="w-full p-4 mb-6 bg-[#475660] font-bold text-white rounded cursor-pointer">
+        <button className="w-full p-4 mb-6 bg-[#194164] font-bold text-white rounded cursor-pointer">
           Enviar Levantamento
         </button>
       </form>

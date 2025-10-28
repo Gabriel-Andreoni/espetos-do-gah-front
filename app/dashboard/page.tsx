@@ -6,16 +6,16 @@ import { Box } from "./_components/Box";
 export default function DashBoard() {
   return (
     <main className="w-full h-screen p-8 grid grid-cols-4 grid-rows-4 gap-8">
-      <Box>
+      <Box backgroundColor="#113859">
         <h1>Lucro Bruto</h1>
       </Box>
-      <Box>
+      <Box backgroundColor="">
         <h1>Lucro Liquido</h1>
       </Box>
-      <Box>
+      <Box backgroundColor="#FDFFFC">
         <h1>Despesas</h1>
       </Box>
-      <Box>
+      <Box backgroundColor="#FDFFFC">
         <h1>Espeto mais Vendido</h1>
       </Box>
 
