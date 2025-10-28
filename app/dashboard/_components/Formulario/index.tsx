@@ -1,15 +1,12 @@
 import { FormEvent, useState } from "react";
 import Image from "next/image";
 
-import ArrowUp from "@/public/up-arrow.png";
-import ArrowDown from "@/public/down-arrow.png";
 import PlusIcon from "@/public/adicionar.png";
 import MinusIcon from "@/public/botao-de-menos.png";
 
 const API_URL = "http://localhost:5077/levantamentos";
 
 export default function Formulario() {
-  const [formActive, setFormActive] = useState<boolean>(false);
   const [dataLevantamento, setDataLevantamento] = useState<string>("");
   const [quantCarne, setQuantCarne] = useState<number>(0);
   const [precoVendidoCarne, setPrecoVendidoCarne] = useState<number>(0);
@@ -53,7 +50,10 @@ export default function Formulario() {
         { nome: "Franbacon", quantidade: quantFranbacon },
         { nome: "Linguiça", quantidade: quantLinguica },
       ].reduce((a, b) => (a.quantidade > b.quantidade ? a : b));
-      localStorage.setItem("espetoMaisVendido", JSON.stringify(espetoMaisVendido))
+      localStorage.setItem(
+        "espetoMaisVendido",
+        JSON.stringify(espetoMaisVendido)
+      );
     }
   }
 
@@ -93,34 +93,12 @@ export default function Formulario() {
   }
 
   return (
-    <div className={`w-full h-screen  p-8 z-[9999999] relative`}>
+    <div className={`w-full h-auto col-span-3 row-span-4`}>
       <form
-        className={`w-full h-auto p-8 flex flex-col gap-4 bg-[#f9f9f9] rounded ${
-          formActive ? "translate-0 " : "translate-y-9/12"
-        } relative transition-all duration-300`}
+        className="w-full h-auto px-8 flex flex-col gap-4 bg-[#f9f9f9]"
         onSubmit={handleSubmit}
       >
-        {!formActive ? (
-          <Image
-            className="absolute -top-6 left-6/12 cursor-pointer"
-            src={ArrowUp.src}
-            alt="ícone de subir"
-            width={48}
-            height={48}
-            onClick={() => setFormActive((prevState) => !prevState)}
-          />
-        ) : (
-          <Image
-            className="absolute -top-6 left-6/12 cursor-pointer"
-            src={ArrowDown.src}
-            alt="ícone de descer"
-            width={48}
-            height={48}
-            onClick={() => setFormActive((prevState) => !prevState)}
-          />
-        )}
-
-        <div className="w-full mt-8 p-8 flex flex-col justify-end items-end gap-2 border border-l-8 border-[#475660] rounded">
+        <div className="w-full mt-8 p-6 flex flex-col justify-end items-end gap-2 border border-l-8 border-[#475660] rounded">
           <label htmlFor="data-levantamento" className="font-bold text-black">
             Data do Levantamento
           </label>
@@ -132,7 +110,7 @@ export default function Formulario() {
           />
         </div>
 
-        <div className="w-full p-8 flex flex-wrap justify-evenly gap-y-4 border border-l-8 border-[#475660] rounded">
+        <div className="w-full p-6 flex flex-wrap justify-evenly gap-y-4 border border-l-8 border-[#475660] rounded">
           <h2 className="w-full text-black font-bold">Espetos Vendidos</h2>
           <div className="flex gap-4 items-center">
             <label className="text-black font-bold">Carne</label>
@@ -240,7 +218,7 @@ export default function Formulario() {
           </div>
         </div>
 
-        <div className="w-full p-8 flex flex-col gap-8 border border-l-8 border-[#475660] rounded">
+        <div className="w-full p-6 flex flex-col gap-8 border border-l-8 border-[#475660] rounded">
           <h2 className="w-full text-black font-bold">Despesas</h2>
           <div className="flex gap-4 items-center">
             <label className="text-black font-bold" htmlFor="carvao">
@@ -391,7 +369,7 @@ export default function Formulario() {
             </div>
           </div>
         </div>
-        <button className="w-full mb-4 p-4 bg-[#475660] font-bold text-white rounded cursor-pointer">
+        <button className="w-full p-4 mb-6 bg-[#475660] font-bold text-white rounded cursor-pointer">
           Enviar Levantamento
         </button>
       </form>
