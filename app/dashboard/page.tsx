@@ -2,21 +2,35 @@
 
 import Formulario from "./_components/Formulario";
 import { Box } from "./_components/Box";
+import { GetLucroBruto } from "../actions/getLucroBruto";
+import { GetLucroLiquido } from "../actions/getLucroLiquido";
+import { GetDespesas } from "../actions/getDespesas";
+import { GetEspetoMaisVendido } from "../actions/getEspetoMaisVendido";
 
 export default function DashBoard() {
+  const lucroBruto = GetLucroBruto();
+  const lucroLiquido = GetLucroLiquido();
+  const despesas = GetDespesas();
+  let espetoMaisVendido;
+  if(GetEspetoMaisVendido()) espetoMaisVendido = JSON.parse(GetEspetoMaisVendido());
+  
   return (
     <main className="w-full h-screen p-8 grid grid-cols-4 grid-rows-4 gap-8">
-      <Box backgroundColor="#113859">
-        <h1>Lucro Bruto</h1>
+      <Box backgroundColor="bg-[#1A4264]">
+        <h2 className="text-sm text-[#FDFFFC]">Lucro Bruto</h2>
+        <span className="text-5xl text-[#FDFFFC] font-bold">{lucroBruto}</span>
       </Box>
-      <Box backgroundColor="">
-        <h1>Lucro Liquido</h1>
+      <Box backgroundColor="bg-[#FDA015]">
+        <h2 className="text-sm text-[#FDFFFC]">Lucro Líquido</h2>
+        <span className="text-5xl text-[#FDFFFC] font-bold">{lucroLiquido}</span>
       </Box>
-      <Box backgroundColor="#FDFFFC">
-        <h1>Despesas</h1>
+      <Box backgroundColor="bg-[#FDFFFC]">
+        <h2 className="text-sm text-[#1A4264]">Despesas</h2>
+        <span className="text-5xl text-[#1A4264] font-bold">{despesas}</span>
       </Box>
-      <Box backgroundColor="#FDFFFC">
-        <h1>Espeto mais Vendido</h1>
+      <Box backgroundColor="bg-[#FDFFFC]">
+        <h2 className="text-sm text-[#1A4264]">Espeto Mais Vendido</h2>
+        <span className="text-5xl text-[#1A4264] font-bold">{espetoMaisVendido?.nome}</span>
       </Box>
 
       <Formulario />
