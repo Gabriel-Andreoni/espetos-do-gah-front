@@ -6,6 +6,7 @@ import { GetLucroBruto } from "../actions/getLucroBruto";
 import { GetLucroLiquido } from "../actions/getLucroLiquido";
 import { GetDespesas } from "../actions/getDespesas";
 import { GetEspetoMaisVendido } from "../actions/getEspetoMaisVendido";
+import { Levantamentos } from "./_components/Levantamentos";
 
 export default function DashBoard() {
   const lucroBruto = GetLucroBruto();
@@ -35,6 +36,7 @@ export default function DashBoard() {
       </Box>
 
       <Formulario />
+      <Levantamentos />
     </main>
   );
 }
