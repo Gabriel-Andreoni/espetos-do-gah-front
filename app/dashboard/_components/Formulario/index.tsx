@@ -28,8 +28,6 @@ export default function Formulario() {
     data.getMonth() + 1
   }-${data.getDate()}`;
 
-  console.log(dataAtual);
-
   function setLocalStorageValues() {
     if (dataLevantamento == dataAtual) {
       const lucroBruto =
@@ -62,6 +60,8 @@ export default function Formulario() {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setLocalStorageValues();
+    setDataLevantamento(dataAtual);
+    console.log(dataLevantamento)
 
     await fetch(API_URL, {
       method: "POST",
@@ -108,8 +108,7 @@ export default function Formulario() {
             type="date"
             id="data-levantamento"
             className="w-2/12 p-2 font-bold text-black border border-[#194164] rounded cursor-pointer"
-            value={dataAtual}
-            onChange={(e) => setDataLevantamento(e.target.value)}
+            defaultValue={dataAtual}
           />
         </div>
 
